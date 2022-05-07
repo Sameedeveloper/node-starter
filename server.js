@@ -5,8 +5,15 @@ const app = express()
 
 //connect database
 connectDB()
-
+app.use(express.json({ extended: false })) //to allow the use of req.body in routes
 app.get('/', (req, res) => res.send('API running'))
+
+//define routes
+
+app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
+app.use('/api/posts', require('./routes/api/posts'))
+app.use('/api/profile', require('./routes/api/profile'))
 
 const PORT = process.env.PORT || 5000
 
